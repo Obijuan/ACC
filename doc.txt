@@ -1,0 +1,15 @@
+ACC:  Apollo CPU Core
+
+
+1)
+La CPU del apollo (AGC) funciona a 1Mhz.
+Tiene 11 instrucciones de 16 bits.
+Memoria: 16K (16 bancos de 1K).
+Banco 0: RAM. Resto ROM
+
+
+Assembly language manual:
+
+http://www.ibiblio.org/apollo/assembly_language_manual.html
+
+

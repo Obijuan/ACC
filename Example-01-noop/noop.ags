@@ -1,0 +1,11 @@
+# -- Hello world:  NOOP instruction
+# -- To assemble: ./yaYUL noop.ags
+# -- To simulate: ./yaAGC  --exec=noop.ags.bin
+
+	SETLOC 4000  # -- Dirección está en octal. Es el comienzo del banco 2
+
+loop	NOOP
+	TC loop
+
+# -- Machine code: 18 00 18 02 D0 02
+
