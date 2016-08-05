@@ -1,0 +1,5 @@
+*.asc
+*.blif
+.sconsign.dblite
+*.out
+
