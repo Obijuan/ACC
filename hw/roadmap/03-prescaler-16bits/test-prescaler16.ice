@@ -11,15 +11,6 @@
   "graph": {
     "blocks": [
       {
-        "id": "b432652a-0857-4489-895e-3f7d04005300",
-        "type": "prescaler_16",
-        "data": {},
-        "position": {
-          "x": 384,
-          "y": 88
-        }
-      },
-      {
         "id": "69dc9fd9-d440-4388-8f66-2bac6a4a850b",
         "type": "basic.input",
         "data": {
@@ -31,7 +22,7 @@
         },
         "position": {
           "x": 168,
-          "y": 88
+          "y": 72
         }
       },
       {
@@ -48,6 +39,24 @@
           "x": 680,
           "y": 88
         }
+      },
+      {
+        "id": "f02fff53-e111-4185-9ac8-6ffd5836fdd4",
+        "type": "prescaler_16",
+        "data": {},
+        "position": {
+          "x": 416,
+          "y": 88
+        }
+      },
+      {
+        "id": "b9000e76-7b99-4f87-956b-97a084530d53",
+        "type": "bit.1",
+        "data": {},
+        "position": {
+          "x": 176,
+          "y": 176
+        }
       }
     ],
     "wires": [
@@ -57,18 +66,28 @@
           "port": "out"
         },
         "target": {
-          "block": "b432652a-0857-4489-895e-3f7d04005300",
+          "block": "f02fff53-e111-4185-9ac8-6ffd5836fdd4",
           "port": "7551173a-8423-44ce-b999-fbed66737cd8"
         }
       },
       {
         "source": {
-          "block": "b432652a-0857-4489-895e-3f7d04005300",
+          "block": "f02fff53-e111-4185-9ac8-6ffd5836fdd4",
           "port": "5c81f4f4-79f9-46f6-9c56-1172cdc48a4d"
         },
         "target": {
           "block": "a7aaa253-5bf5-4312-a5a9-259d69007c6b",
           "port": "in"
+        }
+      },
+      {
+        "source": {
+          "block": "b9000e76-7b99-4f87-956b-97a084530d53",
+          "port": "19c8f68d-5022-487f-9ab0-f0a3cd58bead"
+        },
+        "target": {
+          "block": "f02fff53-e111-4185-9ac8-6ffd5836fdd4",
+          "port": "41d642ae-b559-4057-9ade-43d0b2ab9edf"
         }
       }
     ]
@@ -78,8 +97,8 @@
       "image": "",
       "state": {
         "pan": {
-          "x": 0,
-          "y": 0
+          "x": 4,
+          "y": -1
         },
         "zoom": 1
       },
@@ -131,7 +150,7 @@
             "id": "23cecda0-0c13-4fa9-b9fd-d11aa9bd1e89",
             "type": "basic.info",
             "data": {
-              "info": "16 bits prescaler with enable\n\nIf the input clock is 12Mhz, the output is\n12Mhz/ 2 ** 16 = 183Hz (5.5ms)"
+              "info": ""
             },
             "position": {
               "x": 64,
@@ -139,11 +158,13 @@
             }
           },
           {
-            "id": "6ba417cc-eb93-4b0b-8bee-1183fa7e7a04",
-            "type": "bit.1",
-            "data": {},
+            "id": "41d642ae-b559-4057-9ade-43d0b2ab9edf",
+            "type": "basic.input",
+            "data": {
+              "label": "ena"
+            },
             "position": {
-              "x": 64,
+              "x": 40,
               "y": 192
             }
           }
@@ -171,8 +192,8 @@
           },
           {
             "source": {
-              "block": "6ba417cc-eb93-4b0b-8bee-1183fa7e7a04",
-              "port": "19c8f68d-5022-487f-9ab0-f0a3cd58bead"
+              "block": "41d642ae-b559-4057-9ade-43d0b2ab9edf",
+              "port": "out"
             },
             "target": {
               "block": "c26a3a55-5de5-4363-a676-05f369e84b64",
@@ -181,62 +202,61 @@
           }
         ]
       },
-      "deps": {
-        "bit.1": {
-          "graph": {
-            "blocks": [
-              {
-                "id": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
-                "type": "basic.code",
-                "data": {
-                  "code": "// Bit 1\n\nassign v = 1'b1;",
-                  "ports": {
-                    "in": [],
-                    "out": [
-                      "v"
-                    ]
-                  }
-                },
-                "position": {
-                  "x": 96,
-                  "y": 96
-                }
-              },
-              {
-                "id": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
-                "type": "basic.output",
-                "data": {
-                  "label": ""
-                },
-                "position": {
-                  "x": 608,
-                  "y": 192
-                }
+      "deps": {}
+    },
+    "bit.1": {
+      "graph": {
+        "blocks": [
+          {
+            "id": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
+            "type": "basic.code",
+            "data": {
+              "code": "// Bit 1\n\nassign v = 1'b1;",
+              "ports": {
+                "in": [],
+                "out": [
+                  "v"
+                ]
               }
-            ],
-            "wires": [
-              {
-                "source": {
-                  "block": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
-                  "port": "v"
-                },
-                "target": {
-                  "block": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
-                  "port": "in"
-                }
-              }
-            ]
-          },
-          "deps": {},
-          "image": "resources/images/1.svg",
-          "state": {
-            "pan": {
-              "x": 0,
-              "y": 0
             },
-            "zoom": 1
+            "position": {
+              "x": 96,
+              "y": 96
+            }
+          },
+          {
+            "id": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
+            "type": "basic.output",
+            "data": {
+              "label": ""
+            },
+            "position": {
+              "x": 608,
+              "y": 192
+            }
           }
-        }
+        ],
+        "wires": [
+          {
+            "source": {
+              "block": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
+              "port": "v"
+            },
+            "target": {
+              "block": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
+              "port": "in"
+            }
+          }
+        ]
+      },
+      "deps": {},
+      "image": "resources/images/1.svg",
+      "state": {
+        "pan": {
+          "x": 0,
+          "y": 0
+        },
+        "zoom": 1
       }
     }
   }

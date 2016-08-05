@@ -2,8 +2,8 @@
   "image": "",
   "state": {
     "pan": {
-      "x": 0,
-      "y": 0
+      "x": 4,
+      "y": -1
     },
     "zoom": 1
   },
@@ -55,7 +55,7 @@
         "id": "23cecda0-0c13-4fa9-b9fd-d11aa9bd1e89",
         "type": "basic.info",
         "data": {
-          "info": "16 bits prescaler with enable\n\nIf the input clock is 12Mhz, the output is\n12Mhz/ 2 ** 16 = 183Hz (5.5ms)"
+          "info": ""
         },
         "position": {
           "x": 64,
@@ -63,11 +63,13 @@
         }
       },
       {
-        "id": "6ba417cc-eb93-4b0b-8bee-1183fa7e7a04",
-        "type": "bit.1",
-        "data": {},
+        "id": "41d642ae-b559-4057-9ade-43d0b2ab9edf",
+        "type": "basic.input",
+        "data": {
+          "label": "ena"
+        },
         "position": {
-          "x": 64,
+          "x": 40,
           "y": 192
         }
       }
@@ -95,8 +97,8 @@
       },
       {
         "source": {
-          "block": "6ba417cc-eb93-4b0b-8bee-1183fa7e7a04",
-          "port": "19c8f68d-5022-487f-9ab0-f0a3cd58bead"
+          "block": "41d642ae-b559-4057-9ade-43d0b2ab9edf",
+          "port": "out"
         },
         "target": {
           "block": "c26a3a55-5de5-4363-a676-05f369e84b64",
@@ -105,61 +107,5 @@
       }
     ]
   },
-  "deps": {
-    "bit.1": {
-      "graph": {
-        "blocks": [
-          {
-            "id": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
-            "type": "basic.code",
-            "data": {
-              "code": "// Bit 1\n\nassign v = 1'b1;",
-              "ports": {
-                "in": [],
-                "out": [
-                  "v"
-                ]
-              }
-            },
-            "position": {
-              "x": 96,
-              "y": 96
-            }
-          },
-          {
-            "id": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
-            "type": "basic.output",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 608,
-              "y": 192
-            }
-          }
-        ],
-        "wires": [
-          {
-            "source": {
-              "block": "b959fb96-ac67-4aea-90b3-ed35a4c17bf5",
-              "port": "v"
-            },
-            "target": {
-              "block": "19c8f68d-5022-487f-9ab0-f0a3cd58bead",
-              "port": "in"
-            }
-          }
-        ]
-      },
-      "deps": {},
-      "image": "resources/images/1.svg",
-      "state": {
-        "pan": {
-          "x": 0,
-          "y": 0
-        },
-        "zoom": 1
-      }
-    }
-  }
+  "deps": {}
 }
