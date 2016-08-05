@@ -5,7 +5,7 @@
       "x": 43.00000127066614,
       "y": 3.0000000886511256
     },
-    "zoom": 1.0000000295503753
+    "zoom": 0.9999999917809491
   },
   "board": "icezum",
   "graph": {
@@ -94,8 +94,8 @@
         "data": {
           "label": "LED4",
           "pin": {
-            "name": "LED4",
-            "value": "99"
+            "name": "LED3",
+            "value": "98"
           }
         },
         "position": {
@@ -139,8 +139,8 @@
         "data": {
           "label": "LED3",
           "pin": {
-            "name": "LED3",
-            "value": "98"
+            "name": "LED5",
+            "value": "101"
           }
         },
         "position": {
@@ -154,8 +154,8 @@
         "data": {
           "label": "LED5",
           "pin": {
-            "name": "LED5",
-            "value": "101"
+            "name": "LED4",
+            "value": "99"
           }
         },
         "position": {
@@ -179,23 +179,23 @@
         }
       },
       {
-        "id": "44893984-8e2e-457a-91ee-bb169e677859",
-        "type": "counter8",
-        "data": {},
-        "position": {
-          "x": 400,
-          "y": 32
-        }
-      },
-      {
         "id": "46f6681b-9ad1-4b45-9647-898239f922bd",
         "type": "basic.info",
         "data": {
-          "info": "Example of a manual counter. It is an 8-bit\ncounter with the output connected to the leds\n\nIt should count the number of times the button\nSW1 is pressed... but as there are bouncing, \nevery time the button is pressed, the counter is \nincreased by more than 1 unit\n\nIt is the proof that the switches produce\nbouncing: an insted of a clear rising edge \npulse, a train of pulses is generated on every\nclick"
+          "info": ""
         },
         "position": {
           "x": 40,
           "y": 360
+        }
+      },
+      {
+        "id": "db693bac-a974-41c9-b996-b7926d4fa45e",
+        "type": "counter8",
+        "data": {},
+        "position": {
+          "x": 424,
+          "y": 32
         }
       }
     ],
@@ -226,7 +226,7 @@
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "8d359ccf-e55c-4f62-9f4e-0ed669093f37"
         }
       },
@@ -236,13 +236,13 @@
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "d1cb5113-959b-4b28-96d0-7cc069764a6c"
         }
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "80caeb1a-62f7-47ee-a810-919a177c5edc"
         },
         "target": {
@@ -252,7 +252,7 @@
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "e9374cff-f9cb-4f7d-810e-ca8de33c9185"
         },
         "target": {
@@ -268,7 +268,7 @@
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "70ad0ba4-d26b-4d19-b402-a9e1632cdd44"
         },
         "target": {
@@ -278,17 +278,13 @@
         "vertices": [
           {
             "x": 664,
-            "y": 136
-          },
-          {
-            "x": 664,
             "y": 152
           }
         ]
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "7e229adb-461e-4aa2-92f7-c23cebd73d79"
         },
         "target": {
@@ -298,13 +294,13 @@
         "vertices": [
           {
             "x": 656,
-            "y": 216
+            "y": 232
           }
         ]
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "4c406084-e76c-4429-b72d-22273015589c"
         },
         "target": {
@@ -313,14 +309,14 @@
         },
         "vertices": [
           {
-            "x": 648,
+            "x": 640,
             "y": 296
           }
         ]
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "3364a6ce-7682-4c7d-a8be-81f0a227d054"
         },
         "target": {
@@ -329,14 +325,14 @@
         },
         "vertices": [
           {
-            "x": 640,
-            "y": 360
+            "x": 624,
+            "y": 288
           }
         ]
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "368f3996-1b7e-4a92-b28e-5b79b325c7eb"
         },
         "target": {
@@ -345,14 +341,14 @@
         },
         "vertices": [
           {
-            "x": 632,
-            "y": 424
+            "x": 608,
+            "y": 376
           }
         ]
       },
       {
         "source": {
-          "block": "44893984-8e2e-457a-91ee-bb169e677859",
+          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
           "port": "269f800a-9355-46ee-8099-266832364058"
         },
         "target": {
@@ -361,8 +357,8 @@
         },
         "vertices": [
           {
-            "x": 624,
-            "y": 512
+            "x": 592,
+            "y": 376
           }
         ]
       }
@@ -454,7 +450,7 @@
           "x": 0,
           "y": 0
         },
-        "zoom": 1.0000000295503753
+        "zoom": 0.9999999917809491
       },
       "graph": {
         "blocks": [
@@ -561,7 +557,7 @@
             "id": "269f800a-9355-46ee-8099-266832364058",
             "type": "basic.output",
             "data": {
-              "label": "c4"
+              "label": "c7"
             },
             "position": {
               "x": 1016,

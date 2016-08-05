@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 1.0000000295503753
+    "zoom": 0.9999999917809491
   },
   "board": "icezum",
   "graph": {
@@ -149,7 +149,7 @@
         "id": "269f800a-9355-46ee-8099-266832364058",
         "type": "basic.output",
         "data": {
-          "label": "c4",
+          "label": "c7",
           "pin": {
             "name": "LED7",
             "value": "104"
@@ -158,15 +158,6 @@
         "position": {
           "x": 1016,
           "y": 560
-        }
-      },
-      {
-        "id": "8d941a53-1b70-4b5d-b015-6dc137b28a81",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 288,
-          "y": 376
         }
       },
       {
@@ -198,16 +189,6 @@
       }
     ],
     "wires": [
-      {
-        "source": {
-          "block": "d1cb5113-959b-4b28-96d0-7cc069764a6c",
-          "port": "out"
-        },
-        "target": {
-          "block": "8d941a53-1b70-4b5d-b015-6dc137b28a81",
-          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
-        }
-      },
       {
         "source": {
           "block": "284dc6c4-1fec-4979-83cd-d4f397127011",
@@ -294,16 +275,6 @@
       },
       {
         "source": {
-          "block": "8d941a53-1b70-4b5d-b015-6dc137b28a81",
-          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
-        },
-        "target": {
-          "block": "284dc6c4-1fec-4979-83cd-d4f397127011",
-          "port": "rst"
-        }
-      },
-      {
-        "source": {
           "block": "284dc6c4-1fec-4979-83cd-d4f397127011",
           "port": "c5"
         },
@@ -343,87 +314,18 @@
             "y": 552
           }
         ]
+      },
+      {
+        "source": {
+          "block": "d1cb5113-959b-4b28-96d0-7cc069764a6c",
+          "port": "out"
+        },
+        "target": {
+          "block": "284dc6c4-1fec-4979-83cd-d4f397127011",
+          "port": "rst"
+        }
       }
     ]
   },
-  "deps": {
-    "config.Input-config": {
-      "image": "resources/images/input-config.svg",
-      "state": {
-        "pan": {
-          "x": -23,
-          "y": 8
-        },
-        "zoom": 1
-      },
-      "graph": {
-        "blocks": [
-          {
-            "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
-            "type": "basic.code",
-            "data": {
-              "code": "wire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
-              "ports": {
-                "in": [
-                  "i"
-                ],
-                "out": [
-                  "o"
-                ]
-              }
-            },
-            "position": {
-              "x": 256,
-              "y": 104
-            }
-          },
-          {
-            "id": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
-            "type": "basic.input",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 64,
-              "y": 200
-            }
-          },
-          {
-            "id": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
-            "type": "basic.output",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 776,
-              "y": 200
-            }
-          }
-        ],
-        "wires": [
-          {
-            "source": {
-              "block": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
-              "port": "out"
-            },
-            "target": {
-              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
-              "port": "i"
-            }
-          },
-          {
-            "source": {
-              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
-              "port": "o"
-            },
-            "target": {
-              "block": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
-              "port": "in"
-            }
-          }
-        ]
-      },
-      "deps": {}
-    }
-  }
+  "deps": {}
 }
