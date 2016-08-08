@@ -1,0 +1,10 @@
+//-- Original file: test.ags.bin
+//-- Output file format: verilog
+//-- AGC Opcodes in hex
+//-- Initial address: 0x800
+
+1801
+0801
+0802
+0803
+4FFA

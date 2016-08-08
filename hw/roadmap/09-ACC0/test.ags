@@ -1,0 +1,9 @@
+# -- Hello world:  NOOP instruction
+# -- To assemble: $ yaYUL test.ags
+# -- To simulate: $ yaAGC  --exec=test.ags.bin
+# -- To generate rom: $ acc-rom test.ags.bin
+
+        SETLOC 4000  # -- Address in octal (it correspond to 0x800 in hex)
+
+        NOOP
+loop    TC loop
