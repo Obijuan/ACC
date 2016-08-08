@@ -1,5 +1,5 @@
-set_io sysclk 21
-set_io clk 10
+set_io clk 21
+set_io next 10
 set_io rst 11
 set_io d0 95
 set_io d1 96

@@ -1,8 +1,15 @@
+//-----------------------------------------------------------------------------
+//-- ACC0 (Apollo CPU Core 0)
+//--  FPGA, mediante lenguaje Verilog
+//-----------------------------------------------------------------------------
+//-- (C) August 2016. Juan Gonzaelz-Gomez (Obijuan)
+//-- Released under the GPL license
+//-----------------------------------------------------------------------------
 `default_nettype none
 
-module rom1ktest (
-    input wire sysclk,
+module ACC0 (
     input wire clk,
+    input wire next,
     input wire rst,
     output wire d0,
     output wire d1,
@@ -14,20 +21,34 @@ module rom1ktest (
     output wire d7
 );
 
-wire [15:0] dout;
-reg [9:0] addr;
+//-- Rom file
+parameter ROMFILE = "rom.list";
 
-//-- Instanciar la memoria rom
-rom1K16
+//-- Parameters for the memory
+localparam AW = 12;     //-- Address bus
+localparam DW = 16;     //-- Data bus
+
+//-- Initial address
+localparam BOOT_ADDR = 12'h800;
+
+wire [DW-1: 0] rom_dout;
+
+
+//-- Instantiate the ROM memory (2K)
+genrom #(
+        .ROMFILE(ROMFILE),
+        .AW(AW-1),
+        .DW(DW))
   ROM (
-        .clk(sysclk),
-        .addr(addr),
-        .data(dout)
+        .clk(clk),
+        .cs(Z[AW-1]),         //-- Bit A11 for the chip select
+        .addr(Z[AW-2:0]),     //-- Bits A10 - A0 for addressing the Rom (2K)
+        .data_out(rom_dout)
       );
 
 //-- Configure the pull-up resistors for clk and rst inputs
-
-wire clk_in, clk2;
+wire next_p;   //-- Next input with pull-up activated
+wire clk_in;
 wire rst_in, rst2;
 wire sw;
 
@@ -35,8 +56,8 @@ SB_IO #(
    .PIN_TYPE(6'b 1010_01),
    .PULLUP(1'b 1)
 ) io_pin (
-   .PACKAGE_PIN(clk),
-   .D_IN_0(clk2)
+   .PACKAGE_PIN(next),
+   .D_IN_0(next_p)
 );
 
 SB_IO #(
@@ -50,55 +71,55 @@ SB_IO #(
 //-- rst_in and clk_in are the signals from the switches, with
 //-- standar logic (1 pressed, 0 not presssed)
 assign rst_in = ~rst2;
-assign sw = ~clk2;
+assign sw = ~next_p;
 
 //-- switch button debounced
 wire sw_deb;
 wire clk_pres;
 
 debounce deb1 (
-  .clk(sysclk),
+  .clk(clk),
   .sw_in(sw),
   .sw_out(sw_deb)
   );
 
-prescaler #(
-  .N(24)
-) pres1 (
-  .clk_in(sysclk),
-  .ena(~sw_deb),
-  .clk_out(clk_pres)
-);
+assign clk_in = sw_deb;
 
-assign clk_in = sw_deb | clk_pres;
+//-- Register Z: Program counter
+reg  [AW-1: 0] Z = BOOT_ADDR;
 
-//-- Counter for incrementing the address
 always @(posedge clk_in or posedge rst_in) begin
   if (rst_in==1'b1)
-    addr <= 10'b0;
+    Z <= BOOT_ADDR;
   else
-    addr <= addr + 1;
+    Z <= Z + 1;
 end
 
-assign {d7,d6,d5,d4,d3,d2,d1,d0} = dout[15:8];
+assign {d7,d6,d5,d4,d3,d2,d1,d0} = rom_dout[15:8];
 
 endmodule
 
+// -- Generic ROM
+module genrom #(
+         parameter AW = 11,   //-- Adress width
+         parameter DW = 16,   //-- Data witdh
+         parameter ROMFILE = "rom.list")  //-- Romfile
+       (
+         input wire clk,                  //-- Clock
+         input cs,                        //-- Chip select
+         input wire [AW-1: 0] addr,       //-- Address bus
+         output reg [DW-1: 0] data_out);  //-- Data bus
 
-module rom1K16 (input clk,
-                input wire [9:0] addr,
-                output reg [15:0] data);
+ //-- Total position of the address
+ localparam NPOS = 2 ** AW;
 
-//-- Name of the file with the rom contents
-parameter ROMFILE = "rom.list";
-
-  //-- Memoria
-  reg [15:0] rom [0:1023];
+  //-- Memory
+  reg [DW-1: 0] rom [0: NPOS-1];
 
   always @(negedge clk) begin
-    data <= rom[addr];
+    if (cs)
+      data_out <= rom[addr];
   end
-
 
 //-- ROM2: Secuencia
 initial begin
@@ -110,7 +131,6 @@ endmodule
 module debounce(input wire clk,
                 input wire sw_in,
                 output wire sw_out);
-
 
 //------------------------------
 //-- CONTROLLER
