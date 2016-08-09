@@ -41,8 +41,8 @@ genrom #(
         .DW(DW))
   ROM (
         .clk(clk),
-        .cs(Z[AW-1]),         //-- Bit A11 for the chip select
-        .addr(Z[AW-2:0]),     //-- Bits A10 - A0 for addressing the Rom (2K)
+        .cs(S[AW-1]),         //-- Bit A11 for the chip select
+        .addr(S[AW-2:0]),     //-- Bits A10 - A0 for addressing the Rom (2K)
         .data_out(rom_dout)
       );
 
@@ -85,33 +85,33 @@ debounce deb1 (
 
 assign clk_in = sw_deb;
 
-//-- Register Z: Program counter
-reg  [AW-1: 0] Z = BOOT_ADDR;
+//-- Register S: Accessing memory
+reg  [AW-1: 0] S = BOOT_ADDR;
 
-//-- Control signals for the Z register
-reg inc = 1;
+//-- Control signals for the S register
+reg INCS = 1;
 
 always @(posedge clk_in or posedge rst_in) begin
   if (rst_in==1'b1)
-    Z <= BOOT_ADDR;
+    S <= BOOT_ADDR;
   else
-    if (inc)
-      Z <= Z + 1;
+    if (INCS)
+      S <= S + 1;
 end
 
 //-- Instruction register
-reg [14:0] RI = 15'b0;
+reg [14:0] G = 15'b0;
 
 //-- Control signal for the RI register
 //-- Every 15-bit instruction is sotred here before executing
-reg ri_load = 1;
+reg WG = 1;
 
 always @(posedge clk)
-  if (ri_load)
-    RI <= rom_dout[14:0];
+  if (WG)
+    G <= rom_dout[14:0];
 
 //-- In ACC0, the 7 more significant bits are shown in leds
-assign {d6,d5,d4,d3,d2,d1,d0} = RI[14:8];
+assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
 
 //-- The LED7 is always set to 0
 assign d7 = 1'b0;
