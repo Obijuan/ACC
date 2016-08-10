@@ -10,7 +10,7 @@
 module ACC0 (
     input wire clk,
     input wire next,
-    input wire rst,
+    input wire prev,
     output wire d0,
     output wire d1,
     output wire d2,
@@ -49,8 +49,9 @@ genrom #(
 //-- Configure the pull-up resistors for clk and rst inputs
 wire next_p;   //-- Next input with pull-up activated
 wire clk_in;
-wire rst_in, rst2;
-wire sw;
+wire prev_p;  //-- Prev input with pull-up activated
+wire sw2;
+wire sw1;
 
 SB_IO #(
    .PIN_TYPE(6'b 1010_01),
@@ -64,39 +65,42 @@ SB_IO #(
    .PIN_TYPE(6'b 1010_01),
    .PULLUP(1'b 1)
 ) io_pin2 (
-   .PACKAGE_PIN(rst),
-   .D_IN_0(rst2)
+   .PACKAGE_PIN(prev),
+   .D_IN_0(prev_p)
 );
 
 //-- rst_in and clk_in are the signals from the switches, with
 //-- standar logic (1 pressed, 0 not presssed)
-assign rst_in = ~rst2;
-assign sw = ~next_p;
+assign sw2 = ~prev_p;
+assign sw1 = ~next_p;
 
 //-- switch button debounced
-wire sw_deb;
-wire clk_pres;
+wire sw1_deb;
+wire sw2_deb;
 
-debounce deb1 (
+debounce_pulse deb1 (
   .clk(clk),
-  .sw_in(sw),
-  .sw_out(sw_deb)
+  .sw_in(sw1),
+  .sw_out(sw1_deb)
   );
 
-assign clk_in = sw_deb;
+debounce_pulse deb2 (
+    .clk(clk),
+    .sw_in(sw2),
+    .sw_out(sw2_deb)
+    );
+
+assign clk_in = sw1_deb;
 
 //-- Register S: Accessing memory
 reg  [AW-1: 0] S = BOOT_ADDR;
 
-//-- Control signals for the S register
-reg INCS = 1;
-
-always @(posedge clk_in or posedge rst_in) begin
-  if (rst_in==1'b1)
-    S <= BOOT_ADDR;
-  else
-    if (INCS)
+always @(posedge clk) begin
+    if (sw1_deb)
       S <= S + 1;
+    else
+      if (sw2_deb)
+        S <= S - 1;
 end
 
 //-- Instruction register
@@ -111,7 +115,8 @@ always @(posedge clk)
     G <= rom_dout[14:0];
 
 //-- In ACC0, the 7 more significant bits are shown in leds
-assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
+//assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
+assign {d6,d5,d4,d3,d2,d1,d0} = rom_dout[14:8];
 
 //-- The LED7 is always set to 0
 assign d7 = 1'b0;
@@ -147,22 +152,23 @@ end
 
 endmodule
 
-module debounce(input wire clk,
+module debounce_pulse(input wire clk,
                 input wire sw_in,
                 output wire sw_out);
+
 
 //------------------------------
 //-- CONTROLLER
 //------------------------------
 
 //-- fsm states
-localparam STABLE_0  = 0;  //-- Idle state. Button not pressed
-localparam WAIT_1 = 1;     //-- Waiting for the stabilization of 1. Butt pressed
-localparam STABLE_1 = 2;   //-- Button is pressed and stable
-localparam WAIT_0 = 3;     //-- Button released. Waiting for stabilization of 0
+localparam IDLE  = 0;    //-- Idle state. Button not pressed
+localparam WAIT_1  = 1;  //-- Waiting for the stabilization of 1. Butt pressed
+localparam PULSE = 2;    //-- 1-clk pulse is generated
+localparam WAIT_0 = 3;   //-- Button released. Waiting for stabilization of 0
 
 //-- Registers for storing the states
-reg [1:0] state = STABLE_0;
+reg [1:0] state = IDLE;
 reg [1:0] next_state;
 
 //-- Control signals
@@ -187,7 +193,7 @@ always @(*) begin
 
     //-- Button not pressed
     //-- Remain in this state until the botton is pressed
-    STABLE_0: begin
+    IDLE: begin
       timer_ena = 0;
       out = 0;
       if (sw_in)
@@ -197,23 +203,22 @@ always @(*) begin
     //-- Wait until x ms has elapsed
     WAIT_1: begin
       timer_ena = 1;
-      out = 1;
+      out = 0;
       if (timer_trig)
-        next_state = STABLE_1;
+        next_state = PULSE;
     end
 
-    STABLE_1: begin
+    PULSE: begin
       timer_ena = 0;
       out = 1;
-      if (sw_in == 0)
-        next_state = WAIT_0;
+      next_state = WAIT_0;
     end
 
     WAIT_0: begin
       timer_ena = 1;
       out = 0;
-      if (timer_trig)
-        next_state = STABLE_0;
+      if (timer_trig && sw_in==0)
+        next_state = IDLE;
     end
 
     default: begin
@@ -237,7 +242,7 @@ prescaler #(
   .clk_out(timer_trig)
 );
 
-endmodule  // debounce
+endmodule  // debouncer_pulse
 
 
 //-- Prescaler N bits
