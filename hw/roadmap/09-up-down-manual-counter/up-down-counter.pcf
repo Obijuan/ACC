@@ -1,0 +1,11 @@
+set_io clk 21
+set_io sw1 10
+set_io sw2 11
+set_io c0 95
+set_io c1 96
+set_io c2 97
+set_io c3 98
+set_io c4 99
+set_io c5 101
+set_io c6 102
+set_io c7 104
