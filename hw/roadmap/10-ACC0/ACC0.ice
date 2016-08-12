@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 1
+    "zoom": 0.9999999511847154
   },
   "board": "icezum",
   "graph": {
@@ -218,7 +218,7 @@
         "id": "e5d916d7-dccf-4113-b5d9-1b6b01ec3564",
         "type": "basic.info",
         "data": {
-          "info": ""
+          "info": "ACC0 (Apollo CPU Core 0)\n------------------------\n\nIt just shows the 7 most significant bits of the\n2K ROM memory in the leds. With the SW1 \npushbutton the address is increased, \nand with the sW2 is decreased. It allows to \nmanually check/view the rom contest to see if\nit is correctly loaded\n\nThe rom.list file is generated using the\napollo assembler yaYUL and the acc-rom.py script\nexecuted:\n$ yaYUL test.ags\n$ acc-rom test.ags.bin\n\nThe generated rom.list file should be in the\nsame directory than the icestudio proyect"
         },
         "position": {
           "x": 72,
