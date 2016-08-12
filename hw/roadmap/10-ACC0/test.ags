@@ -7,12 +7,12 @@
 
 #--- These are numbers in octal
 #--- In the ACC0 they will be displayed in the leds
-				 OCT 40000  #-- 1000000  Shown in leds
-				 OCT 20000  #-- 0100000
-				 OCT 10000  #-- 0010000
-				 OCT 04000  #-- 0001000
-				 OCT 02000  #-- 0000100
-				 OCT 01000  #-- 0000010
-				 OCT 00400  #-- 0000001
-				 NOOP       #-- 0011000
-loop     TC loop    #-- 0001000
+	OCT 40000  #-- 1000000  Shown in leds
+	OCT 20000  #-- 0100000
+	OCT 10000  #-- 0010000
+	OCT 04000  #-- 0001000
+	OCT 02000  #-- 0000100
+	OCT 01000  #-- 0000010
+	OCT 00400  #-- 0000001
+	NOOP       #-- 0011000
+loop    TC loop    #-- 0001000
