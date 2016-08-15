@@ -1,9 +1,14 @@
-# -- Hello world:  NOOP instruction
-# -- To assemble: $ yaYUL test.ags
-# -- To simulate: $ yaAGC  --exec=test.ags.bin
-# -- To generate rom: $ acc-rom test.ags.bin
+# -- Test.ags: Our first assembly program for ACC0
+# -- It has no instructions, just data stored in the ROM memory
+# -- The ACC0 will display the 7 most significant bits of these data in the leds
 
-	       SETLOC 4000 # -- Address in octal (it correspond to 0x800 in hex)
+# -- To assemble: yaYUL test.ags
+# -- To simulate: yaAGC  --exec=test.ags.bin
+# -- To generate rom: acc-rom test.ags.bin
+
+
+	# -- The program should start in the 0x800 address (4000 in oct)
+	SETLOC 4000
 
 #--- These are numbers in octal
 #--- In the ACC0 they will be displayed in the leds
@@ -14,5 +19,5 @@
 	OCT 02000  #-- 0000100
 	OCT 01000  #-- 0000010
 	OCT 00400  #-- 0000001
-	NOOP       #-- 0011000
-loop    TC loop    #-- 0001000
+	OCT 77777  #-- 1111111
+
