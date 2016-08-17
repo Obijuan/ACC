@@ -37,10 +37,30 @@ localparam G_INIT = 15'hAA00;
 //-- Opcodes
 localparam  TCF = 3'b001;  //-- Transfer Control Fixed. Unconditional jump
 
-wire [DW-1: 0] rom_dout;
+//-- Constants for the modes: automatic/manual
+localparam MANUAL_MODE = 1'b1;
+localparam AUTOMATIC_MODE = 1'b0;
+
+//-- Default mode configuration (Uncomment one of the options)
+//localparam DEFAULT_MODE = AUTOMATIC_MODE;
+localparam DEFAULT_MODE = MANUAL_MODE;
+
+//-- Delay for the automatic mode (Number of bits for the timmer)
+localparam SLOW = 24;
+localparam MEDIUM = 22;
+localparam FAST = 20;
+
+//-- Configuration for the timer of the automatic mode
+//-- Uncomment one of the options
+//localparam AUTOMATIC_MODE_SPEED = SLOW;
+//localparam AUTOMATIC_MODE_SPEED = MEDIUM;
+localparam  AUTOMATIC_MODE_SPEED = FAST;
 
 
 //-- Instantiate the ROM memory (2K)
+
+wire [DW-1: 0] rom_dout;
+
 genrom #(
         .ROMFILE(ROMFILE),
         .AW(AW-1),
@@ -128,26 +148,25 @@ always @(posedge clk)
 assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
 
 //-- The LED7 is for debugging
-assign d7 = mode; //timer_trig_pulse;
+assign d7 = mode;
 
 wire timer_trig;
 wire timer_trig_pulse;
 
 //-- Timer for automatic mode
 prescaler #(
-  .N(24)
+  .N(AUTOMATIC_MODE_SPEED)
 ) timer_automatic (
   .clk_in(clk),
   .ena(1'b1),
   .clk_out(timer_trig)
 );
 
-//-- Flip-flip for toggleing the mode (0 manual, 1 automatic)
-
-reg mode = 0;
+//-- Flip-flip for toggleing the mode
+reg mode = DEFAULT_MODE;
 
 //-- Mux for choosing manual/automatic event signal
-wire event_trig = (mode == 0) ? sw1_deb : timer_trig_pulse;
+wire event_trig = (mode == MANUAL_MODE) ? sw1_deb : timer_trig_pulse;
 
 always @(posedge clk) begin
 //-- Change the mode when the SW2 is pressed
