@@ -4,8 +4,22 @@
 //-- (C) August 2016. Juan Gonzaelz-Gomez (Obijuan)
 //-- Released under the GPL license
 //-----------------------------------------------------------------------------
+//-- ACC1 is the ACC0 with the following features:
+//--
+//--  * Control Unit that can execute the instructions: TCF and NOOP
+//--  * It has 2 modes of execution: manual or automatic
+//--  * In automatic mode the instructions are executed one after another
+//--       without pressing any button
+//--  * In manual mode, the instructions are execute one by one, by pressing
+//--       the sw1 button
+//--  * The Time in automtic mode can be configure by verilog parameters
+//--  * The current mode is shown in the LED7 (1: manual, 0 automatic)
+//-----------------------------------------------------------------------------
 `default_nettype none
 
+//------------------------------------------------------------
+//--  TOP MODULE
+//------------------------------------------------------------
 module ACC1 (
     input wire clk,       //-- System clock
     input wire next,      //-- Process next instruction/data
@@ -21,6 +35,25 @@ module ACC1 (
     output wire d7
 );
 
+//--------------------------------------------
+//-- CONSTANTS
+//--------------------------------------------
+//-- Constants for the modes: automatic/manual
+localparam MANUAL_MODE = 1'b1;
+localparam AUTOMATIC_MODE = 1'b0;
+
+//-- Constant for the speed of automatic mode (Number of bits for the timmer)
+localparam SLOW = 24;    //--  1.4 secs
+localparam MEDIUM = 22;  //--  350 ms
+localparam FAST = 20;    //--  90 ms
+
+//-- AGC Opcodes
+localparam  TCF = 3'b001;  //-- Transfer Control Fixed. Unconditional jump
+
+//-------------------------------------------------
+//-- PARAMETERS & CONFIGURATION
+//-------------------------------------------------
+
 //-- Rom file
 parameter ROMFILE = "rom.list";
 
@@ -34,33 +67,24 @@ localparam BOOT_ADDR = 12'h800;
 //-- Initial G-reg value (shown in leds initially)
 localparam G_INIT = 15'hAA00;
 
-//-- Opcodes
-localparam  TCF = 3'b001;  //-- Transfer Control Fixed. Unconditional jump
-
-//-- Constants for the modes: automatic/manual
-localparam MANUAL_MODE = 1'b1;
-localparam AUTOMATIC_MODE = 1'b0;
-
 //-- Default mode configuration (Uncomment one of the options)
 //localparam DEFAULT_MODE = AUTOMATIC_MODE;
 localparam DEFAULT_MODE = MANUAL_MODE;
 
-//-- Delay for the automatic mode (Number of bits for the timmer)
-localparam SLOW = 24;
-localparam MEDIUM = 22;
-localparam FAST = 20;
-
 //-- Configuration for the timer of the automatic mode
 //-- Uncomment one of the options
 //localparam AUTOMATIC_MODE_SPEED = SLOW;
-//localparam AUTOMATIC_MODE_SPEED = MEDIUM;
-localparam  AUTOMATIC_MODE_SPEED = FAST;
+localparam AUTOMATIC_MODE_SPEED = MEDIUM;
+//localparam  AUTOMATIC_MODE_SPEED = FAST;
 
+//----------------------------------------------------------
+//-- ROM MEMORY
+//----------------------------------------------------------
 
-//-- Instantiate the ROM memory (2K)
-
+//-- ROM output data
 wire [DW-1: 0] rom_dout;
 
+//-- Instantiate the ROM memory (2K)
 genrom #(
         .ROMFILE(ROMFILE),
         .AW(AW-1),
@@ -72,12 +96,17 @@ genrom #(
         .data_out(rom_dout)
       );
 
+//-----------------------------------------------------------
+//-- INPUT BUTTONS CONFIGURATION
+//-----------------------------------------------------------
+
 //-- Configure the pull-up resistors for clk and rst inputs
 wire next_p;   //-- Next input with pull-up activated
 wire selmode_p; //-- Selmode button with pull-up activated
 wire sw1;
 wire sw2;
 
+//-- Button 1 pull-up
 SB_IO #(
    .PIN_TYPE(6'b 1010_01),
    .PULLUP(1'b 1)
@@ -86,6 +115,7 @@ SB_IO #(
    .D_IN_0(next_p)
 );
 
+//-- Button 2 pull-up
 SB_IO #(
    .PIN_TYPE(6'b 1010_01),
    .PULLUP(1'b 1)
@@ -102,12 +132,14 @@ assign sw2 = ~selmode_p;
 wire sw1_deb;
 wire sw2_deb;
 
+//-- Debouncer for button 1
 debounce_pulse deb1 (
   .clk(clk),
   .sw_in(sw1),
   .sw_out(sw1_deb)
   );
 
+//-- Debouncer for button 2
 debounce_pulse deb2 (
   .clk(clk),
   .sw_in(sw2),
@@ -122,9 +154,14 @@ debounce_pulse deb3 (
   .sw_out(timer_trig_pulse)
   );
 
-//-- Register S: Accessing memory
+//------------------------------------
+//-- S REGISTER: Addressing memory
+//------------------------------------
+
+//-- Define de S-reg
 reg  [AW-1: 0] S = BOOT_ADDR;
 
+//-- Register with paralell load (WS) and increment (INCS)
 always @(posedge clk) begin
     if (WS)
       S <= dir12;
@@ -133,27 +170,37 @@ always @(posedge clk) begin
         S <= S + 1;
 end
 
-//-- Instruction register
+//---------------------------------------------------------
+//-- G REGISTER: Store Instruction/data read from memory
+//---------------------------------------------------------
+//-- Define de G-reg
 reg [14:0] G = G_INIT;
 
 //-- G has different fields
 wire [2:0]  opcode = G[14:12]; //-- Opcode: 3 bits
 wire [11:0] dir12 = G[11:0];   //-- Dir12: 12 bits
 
+//-- Register with parallel load (WG)
 always @(posedge clk)
   if (WG)
     G <= rom_dout[14:0];
 
+//-----------------------------------------
+//-- LEDS
+//-----------------------------------------
+
 //-- The 7 more significant bits of G regs are shown in leds
 assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
 
-//-- The LED7 is for debugging
+//-- The LED7 is for displaying the mode (automatic/manual)
 assign d7 = mode;
 
+//------------------------------------------
+//-- Timer for the automatic mode
+//------------------------------------------
 wire timer_trig;
 wire timer_trig_pulse;
 
-//-- Timer for automatic mode
 prescaler #(
   .N(AUTOMATIC_MODE_SPEED)
 ) timer_automatic (
@@ -162,17 +209,20 @@ prescaler #(
   .clk_out(timer_trig)
 );
 
-//-- Flip-flip for toggleing the mode
+//-------------------------------------------------
+//-- Flip-flip T for toggling the mode
+//-------------------------------------------------
 reg mode = DEFAULT_MODE;
 
-//-- Mux for choosing manual/automatic event signal
-wire event_trig = (mode == MANUAL_MODE) ? sw1_deb : timer_trig_pulse;
-
+//-- Flip-flip T. The input is the button 2
 always @(posedge clk) begin
 //-- Change the mode when the SW2 is pressed
   if (sw2_deb)
     mode = ~mode;
 end
+
+//-- Mux for choosing manual/automatic event signal
+wire event_trig = (mode == MANUAL_MODE) ? sw1_deb : timer_trig_pulse;
 
 //---------------------------------------------------
 //-- CONTROL UNIT
@@ -242,6 +292,10 @@ end
 
 endmodule
 
+
+//-----------------------------------------------------------------
+//-- OTHER MODULES
+//-----------------------------------------------------------------
 
 // -- Generic ROM
 module genrom #(
