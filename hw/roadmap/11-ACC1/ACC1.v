@@ -54,8 +54,9 @@ genrom #(
 
 //-- Configure the pull-up resistors for clk and rst inputs
 wire next_p;   //-- Next input with pull-up activated
-wire clk_in;
+wire selmode_p; //-- Selmode button with pull-up activated
 wire sw1;
+wire sw2;
 
 SB_IO #(
    .PIN_TYPE(6'b 1010_01),
@@ -65,12 +66,21 @@ SB_IO #(
    .D_IN_0(next_p)
 );
 
-//-- rst_in and clk_in are the signals from the switches, with
-//-- standar logic (1 pressed, 0 not presssed)
+SB_IO #(
+   .PIN_TYPE(6'b 1010_01),
+   .PULLUP(1'b 1)
+) io_pin2 (
+   .PACKAGE_PIN(selmode),
+   .D_IN_0(selmode_p)
+);
+
+//-- Buttons with positive logic: (1 pressed, 0 not presssed)
 assign sw1 = ~next_p;
+assign sw2 = ~selmode_p;
 
 //-- switch button debounced
 wire sw1_deb;
+wire sw2_deb;
 
 debounce_pulse deb1 (
   .clk(clk),
@@ -78,7 +88,19 @@ debounce_pulse deb1 (
   .sw_out(sw1_deb)
   );
 
-assign clk_in = sw1_deb;
+debounce_pulse deb2 (
+  .clk(clk),
+  .sw_in(sw2),
+  .sw_out(sw2_deb)
+  );
+
+//-- This debouncer is used with the timer for generating a 1-cycle width pulse
+//-- Not for debouncing
+debounce_pulse deb3 (
+  .clk(clk),
+  .sw_in(timer_trig),
+  .sw_out(timer_trig_pulse)
+  );
 
 //-- Register S: Accessing memory
 reg  [AW-1: 0] S = BOOT_ADDR;
@@ -105,9 +127,33 @@ always @(posedge clk)
 //-- The 7 more significant bits of G regs are shown in leds
 assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
 
-//-- The LED7 is always set to 0
-assign d7 = 1'b0;
+//-- The LED7 is for debugging
+assign d7 = mode; //timer_trig_pulse;
 
+wire timer_trig;
+wire timer_trig_pulse;
+
+//-- Timer for automatic mode
+prescaler #(
+  .N(24)
+) timer_automatic (
+  .clk_in(clk),
+  .ena(1'b1),
+  .clk_out(timer_trig)
+);
+
+//-- Flip-flip for toggleing the mode (0 manual, 1 automatic)
+
+reg mode = 0;
+
+//-- Mux for choosing manual/automatic event signal
+wire event_trig = (mode == 0) ? sw1_deb : timer_trig_pulse;
+
+always @(posedge clk) begin
+//-- Change the mode when the SW2 is pressed
+  if (sw2_deb)
+    mode = ~mode;
+end
 
 //---------------------------------------------------
 //-- CONTROL UNIT
@@ -163,7 +209,8 @@ always @(*) begin
     end
 
     WAIT: begin
-      if (sw1_deb)
+      //-- Wait until an event is trigger (timer or sw1 pressed)
+      if (event_trig)
         next_state = FETCH;
     end
 
