@@ -114,9 +114,8 @@ always @(posedge clk)
   if (WG)
     G <= rom_dout[14:0];
 
-//-- In ACC0, the 7 more significant bits are shown in leds
-//assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
-assign {d6,d5,d4,d3,d2,d1,d0} = rom_dout[14:8];
+//-- In ACC0, the 7 more significant bits of the G reg are shown in leds
+assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
 
 //-- The LED7 is always set to 0
 assign d7 = 1'b0;
