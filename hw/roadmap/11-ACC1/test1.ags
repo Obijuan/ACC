@@ -1,3 +1,7 @@
+#-- ACC1 test
+#-- ACC1 will show the data on the leds (7 MSB)
+#-- in an infinite loop
+
 	SETLOC 4000
 
 loop1	OCT 40000  #-- 100 0000  Shown in leds
@@ -7,4 +11,6 @@ loop4	OCT 74000  #-- 111 1000
 loop5	OCT 76000  #-- 111 1100
 loop6	OCT 77000  #-- 111 1110
 loop7	OCT 77400  #-- 111 1111
-loop8	TC loop1    #-- 0001000
+
+	#-- Change the TCF destination jump for testing: loop1, 2, 3...
+loop8	TCF loop1    #-- 0001000

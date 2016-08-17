@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
-//-- ACC1 (Apollo CPU Core 0)
-//--  FPGA, mediante lenguaje Verilog
+//-- ACC1 (Apollo CPU Core 1)
 //-----------------------------------------------------------------------------
 //-- (C) August 2016. Juan Gonzaelz-Gomez (Obijuan)
 //-- Released under the GPL license
@@ -8,10 +7,11 @@
 `default_nettype none
 
 module ACC1 (
-    input wire clk,
-    input wire next,
-    input wire prev,
-    output wire d0,
+    input wire clk,       //-- System clock
+    input wire next,      //-- Process next instruction/data
+    input wire selmode,   //-- Toggle Mode: Manual / automatic
+
+    output wire d0,       //-- Output leds
     output wire d1,
     output wire d2,
     output wire d3,
@@ -31,8 +31,11 @@ localparam DW = 16;     //-- Data bus
 //-- Initial address
 localparam BOOT_ADDR = 12'h800;
 
+//-- Initial G-reg value (shown in leds initially)
+localparam G_INIT = 15'hAA00;
+
 //-- Opcodes
-localparam  TC = 3'b000;
+localparam  TCF = 3'b001;  //-- Transfer Control Fixed. Unconditional jump
 
 wire [DW-1: 0] rom_dout;
 
@@ -89,7 +92,7 @@ always @(posedge clk) begin
 end
 
 //-- Instruction register
-reg [14:0] G = 15'hAA00;
+reg [14:0] G = G_INIT;
 
 //-- G has different fields
 wire [2:0]  opcode = G[14:12]; //-- Opcode: 3 bits
@@ -152,8 +155,8 @@ always @(*) begin
 
     EXEC0: begin
 
-      //-- If opcode is TC, load the register S
-      if (opcode == TC)
+      //-- If opcode is TCF, load the register S
+      if (opcode == TCF)
         WS = 1;
 
       next_state = WAIT;

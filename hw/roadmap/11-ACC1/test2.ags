@@ -1,6 +1,19 @@
+#-- Test2.ags: Testing the NOOP instruction
+#-- The noop instruction just consume cpu cycles
+#-- Nothing is executed
+#-- The assembler change noop by TCF current_dir + 1
+#-- (Jump to the following address)
+#-- So, the noop instruction is shown in the leds exactly as TCF:
+#-- 0011000
+
 	SETLOC 4000
 
-loop	NOOP       #-- 0011000
-	TC loop    #-- 0001000
+	NOOP
+	NOOP
+loop	OCT 63400
+	NOOP
+	OCT 77777
+	TCF loop
+
 
 

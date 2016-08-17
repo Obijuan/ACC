@@ -1,6 +1,6 @@
 set_io clk 21
 set_io next 10
-set_io prev 11
+set_io selmode 11
 set_io d0 95
 set_io d1 96
 set_io d2 97
