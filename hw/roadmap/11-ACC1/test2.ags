@@ -1,0 +1,6 @@
+	SETLOC 4000
+
+loop	NOOP       #-- 0011000
+	TC loop    #-- 0001000
+
+

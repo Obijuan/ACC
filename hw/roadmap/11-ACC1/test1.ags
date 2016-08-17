@@ -1,0 +1,10 @@
+	SETLOC 4000
+
+loop1	OCT 40000  #-- 100 0000  Shown in leds
+loop2	OCT 60000  #-- 110 0000
+loop3	OCT 70000  #-- 111 0000
+loop4	OCT 74000  #-- 111 1000
+loop5	OCT 76000  #-- 111 1100
+loop6	OCT 77000  #-- 111 1110
+loop7	OCT 77400  #-- 111 1111
+loop8	TC loop1    #-- 0001000
