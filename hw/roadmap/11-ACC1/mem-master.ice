@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 0.9999999808840727
+    "zoom": 1
   },
   "board": "icezum",
   "graph": {
@@ -56,7 +56,7 @@
         "id": "977a102d-c8a4-4f50-801f-fc3c55618fa1",
         "type": "basic.output",
         "data": {
-          "label": "led6",
+          "label": "g14",
           "pin": {
             "name": "LED6",
             "value": "102"
@@ -71,7 +71,7 @@
         "id": "d39ce316-14d8-4c8f-aab8-ecc743148f7e",
         "type": "basic.output",
         "data": {
-          "label": "led7",
+          "label": "g13",
           "pin": {
             "name": "LED5",
             "value": "101"
@@ -86,7 +86,7 @@
         "id": "e96f4ca7-5c1b-4c2c-a661-489ffb5010b0",
         "type": "basic.output",
         "data": {
-          "label": "led5",
+          "label": "g12",
           "pin": {
             "name": "LED4",
             "value": "99"
@@ -101,7 +101,7 @@
         "id": "500f945c-7c4c-4176-8fab-a05ba07c093e",
         "type": "basic.output",
         "data": {
-          "label": "led4",
+          "label": "g11",
           "pin": {
             "name": "LED3",
             "value": "98"
@@ -116,7 +116,7 @@
         "id": "1e70803d-0f61-4208-8d19-d971689411d6",
         "type": "basic.output",
         "data": {
-          "label": "led3",
+          "label": "g10",
           "pin": {
             "name": "LED2",
             "value": "97"
@@ -131,7 +131,7 @@
         "id": "15ad8612-25f7-407b-956b-3799b264a62d",
         "type": "basic.output",
         "data": {
-          "label": "led2",
+          "label": "g9",
           "pin": {
             "name": "LED1",
             "value": "96"
@@ -146,7 +146,7 @@
         "id": "e2948be9-94d4-4001-a8dd-6825e3570af6",
         "type": "basic.output",
         "data": {
-          "label": "led1",
+          "label": "g8",
           "pin": {
             "name": "LED0",
             "value": "95"
