@@ -61,17 +61,6 @@
         }
       },
       {
-        "id": "23cecda0-0c13-4fa9-b9fd-d11aa9bd1e89",
-        "type": "basic.info",
-        "data": {
-          "info": ""
-        },
-        "position": {
-          "x": 64,
-          "y": 360
-        }
-      },
-      {
         "id": "6ba417cc-eb93-4b0b-8bee-1183fa7e7a04",
         "type": "bit.1",
         "data": {},

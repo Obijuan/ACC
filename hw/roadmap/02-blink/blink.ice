@@ -53,7 +53,7 @@
         "id": "3dd1e0e8-cf55-437b-81de-59042ea3db54",
         "type": "basic.info",
         "data": {
-          "info": ""
+          "info": "BLINK EXAMPLE\n\nThe LED0 of the Icezum Board is blinked at a \nfrequency of 2.86Hz (0.35ms)\n\nThe system clock (12Mhz) is inserted into a\nprescaler of 22 bits. The output signal is\nconnected directly to the LED0\n\nIn order for the prescaler to work, it should\nbe enable by setting its ena input to 1"
         },
         "position": {
           "x": 40,
@@ -64,7 +64,7 @@
         "id": "5867789c-e089-4b43-b7b7-e83d8c200e34",
         "type": "basic.info",
         "data": {
-          "info": ""
+          "info": "Exercises:\n\n1) Upload the circuit into the icezum board\n   and watch how the led0 is blinking\n   \n2) Change the led to LED7 and upload the \n   circuit again\n   \n3) Connect LED0 and LED7 to the output, in\n   parallel. Now the two leds should blink\n   at the same time\n   \n4) Make the 4 even leds: LED0, LED2, LED4, LED6\n   blink at the same time"
         },
         "position": {
           "x": 456,
