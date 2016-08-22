@@ -12,5 +12,5 @@ loop5	OCT 76000  #-- 111 1100
 loop6	OCT 77000  #-- 111 1110
 loop7	OCT 77400  #-- 111 1111
 
-	#-- Change the TCF destination jump for testing: loop1, 2, 3...
+	#-- Change the TCF destination jump for testing: loop1, loop2, loop3...
 loop8	TCF loop1    #-- 0001000
