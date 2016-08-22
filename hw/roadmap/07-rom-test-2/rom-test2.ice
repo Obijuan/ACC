@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 0.9999999777059552
+    "zoom": 1
   },
   "board": "icezum",
   "graph": {
@@ -188,15 +188,6 @@
         }
       },
       {
-        "id": "f1b856ea-3693-450b-829e-2f913231d48a",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 224,
-          "y": 152
-        }
-      },
-      {
         "id": "d9340974-e6cd-4f36-b943-cb54f6d03a8c",
         "type": "basic.input",
         "data": {
@@ -212,23 +203,32 @@
         }
       },
       {
-        "id": "0467ec20-2833-422f-95e0-cbc2ccc2371b",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 224,
-          "y": 264
-        }
-      },
-      {
         "id": "9439ff28-fd64-46ce-b7ba-8196b8e3d710",
         "type": "basic.info",
         "data": {
-          "info": "ROM-TEST 2\n\nThis is the same example than the test2, but\nthe contents of the rom memory are loaded\nfrom the file rom2.list, that should be placed\nin the app/_build dir in the icestudio (0.2-beta2)\n\nIn future versions it will be change"
+          "info": "ROM-TEST 2\n\nThis is the same example than the test2, but\nthe contents of the rom memory are loaded\nfrom the file rom2.list"
         },
         "position": {
           "x": 56,
           "y": 400
+        }
+      },
+      {
+        "id": "551e10c9-af00-4090-a550-44b28f3d6ddb",
+        "type": "config.pull-up-inv",
+        "data": {},
+        "position": {
+          "x": 224,
+          "y": 152
+        }
+      },
+      {
+        "id": "1fb73a63-0043-4f34-b25b-abb5b85ac58d",
+        "type": "config.pull-up-inv",
+        "data": {},
+        "position": {
+          "x": 224,
+          "y": 264
         }
       }
     ],
@@ -421,7 +421,17 @@
       },
       {
         "source": {
-          "block": "f1b856ea-3693-450b-829e-2f913231d48a",
+          "block": "97ddf936-e2e7-4d25-9cf2-63c1780f3690",
+          "port": "out"
+        },
+        "target": {
+          "block": "551e10c9-af00-4090-a550-44b28f3d6ddb",
+          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
+        }
+      },
+      {
+        "source": {
+          "block": "551e10c9-af00-4090-a550-44b28f3d6ddb",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -431,27 +441,17 @@
       },
       {
         "source": {
-          "block": "97ddf936-e2e7-4d25-9cf2-63c1780f3690",
-          "port": "out"
-        },
-        "target": {
-          "block": "f1b856ea-3693-450b-829e-2f913231d48a",
-          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
-        }
-      },
-      {
-        "source": {
           "block": "d9340974-e6cd-4f36-b943-cb54f6d03a8c",
           "port": "out"
         },
         "target": {
-          "block": "0467ec20-2833-422f-95e0-cbc2ccc2371b",
+          "block": "1fb73a63-0043-4f34-b25b-abb5b85ac58d",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "0467ec20-2833-422f-95e0-cbc2ccc2371b",
+          "block": "1fb73a63-0043-4f34-b25b-abb5b85ac58d",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -1391,8 +1391,8 @@
         }
       }
     },
-    "config.Input-config": {
-      "image": "resources/images/input-config.svg",
+    "config.pull-up-inv": {
+      "image": "resources/images/pull-up-inv.svg",
       "state": {
         "pan": {
           "x": -23,
@@ -1406,7 +1406,7 @@
             "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
             "type": "basic.code",
             "data": {
-              "code": "wire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
+              "code": "// Pull up inv\n\nwire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
               "ports": {
                 "in": [
                   "i"
@@ -1439,7 +1439,7 @@
               "label": ""
             },
             "position": {
-              "x": 776,
+              "x": 760,
               "y": 200
             }
           }
