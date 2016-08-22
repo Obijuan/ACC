@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 1.0000000254854406
+    "zoom": 1
   },
   "board": "icezum",
   "graph": {
@@ -170,15 +170,6 @@
         }
       },
       {
-        "id": "fb0a31f3-3632-4c97-a9e2-b9846ced0f08",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 248,
-          "y": 336
-        }
-      },
-      {
         "id": "080dcc3c-a45e-4dc5-88dc-cc677fd9ef3a",
         "type": "debouncer",
         "data": {},
@@ -199,15 +190,6 @@
         },
         "position": {
           "x": 64,
-          "y": 432
-        }
-      },
-      {
-        "id": "771a6929-4391-4efa-b00a-d58e8ab5db2c",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 256,
           "y": 432
         }
       },
@@ -256,6 +238,24 @@
         "position": {
           "x": 64,
           "y": 536
+        }
+      },
+      {
+        "id": "da221a4d-d164-4ff7-8171-a635182bbb08",
+        "type": "config.pull-up-inv",
+        "data": {},
+        "position": {
+          "x": 240,
+          "y": 336
+        }
+      },
+      {
+        "id": "e5aa73ea-5f39-4853-a19f-2c8858cfaa1e",
+        "type": "config.pull-up-inv",
+        "data": {},
+        "position": {
+          "x": 240,
+          "y": 432
         }
       }
     ],
@@ -389,42 +389,12 @@
       },
       {
         "source": {
-          "block": "4ee40322-a467-485e-a3c7-7f7f2ab9ccc3",
-          "port": "out"
-        },
-        "target": {
-          "block": "fb0a31f3-3632-4c97-a9e2-b9846ced0f08",
-          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
-        }
-      },
-      {
-        "source": {
-          "block": "fb0a31f3-3632-4c97-a9e2-b9846ced0f08",
-          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
-        },
-        "target": {
-          "block": "080dcc3c-a45e-4dc5-88dc-cc677fd9ef3a",
-          "port": "69ca3e51-b565-43e9-8dc8-04d7f624bd67"
-        }
-      },
-      {
-        "source": {
           "block": "36e2c96d-8643-4403-bc79-7f4679ec356b",
           "port": "out"
         },
         "target": {
           "block": "080dcc3c-a45e-4dc5-88dc-cc677fd9ef3a",
           "port": "69dc9fd9-d440-4388-8f66-2bac6a4a850b"
-        }
-      },
-      {
-        "source": {
-          "block": "8eb83c4f-b860-4862-960a-94f1788b8a5f",
-          "port": "out"
-        },
-        "target": {
-          "block": "771a6929-4391-4efa-b00a-d58e8ab5db2c",
-          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
@@ -577,16 +547,6 @@
       },
       {
         "source": {
-          "block": "771a6929-4391-4efa-b00a-d58e8ab5db2c",
-          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
-        },
-        "target": {
-          "block": "87d30b7e-17ae-4d2f-b2b0-6837a3a5d50a",
-          "port": "d1cb5113-959b-4b28-96d0-7cc069764a6c"
-        }
-      },
-      {
-        "source": {
           "block": "b79f7915-9a6b-4402-b824-0c0369901074",
           "port": "664caf9e-5f40-4df4-800a-b626af702e62"
         },
@@ -653,6 +613,46 @@
         "target": {
           "block": "b79f7915-9a6b-4402-b824-0c0369901074",
           "port": "97b51945-d716-4b6c-9db9-970d08541249"
+        }
+      },
+      {
+        "source": {
+          "block": "4ee40322-a467-485e-a3c7-7f7f2ab9ccc3",
+          "port": "out"
+        },
+        "target": {
+          "block": "da221a4d-d164-4ff7-8171-a635182bbb08",
+          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
+        }
+      },
+      {
+        "source": {
+          "block": "da221a4d-d164-4ff7-8171-a635182bbb08",
+          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
+        },
+        "target": {
+          "block": "080dcc3c-a45e-4dc5-88dc-cc677fd9ef3a",
+          "port": "69ca3e51-b565-43e9-8dc8-04d7f624bd67"
+        }
+      },
+      {
+        "source": {
+          "block": "8eb83c4f-b860-4862-960a-94f1788b8a5f",
+          "port": "out"
+        },
+        "target": {
+          "block": "e5aa73ea-5f39-4853-a19f-2c8858cfaa1e",
+          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
+        }
+      },
+      {
+        "source": {
+          "block": "e5aa73ea-5f39-4853-a19f-2c8858cfaa1e",
+          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
+        },
+        "target": {
+          "block": "87d30b7e-17ae-4d2f-b2b0-6837a3a5d50a",
+          "port": "d1cb5113-959b-4b28-96d0-7cc069764a6c"
         }
       }
     ]
@@ -1431,84 +1431,6 @@
                 "y": 360
               }
             ]
-          }
-        ]
-      },
-      "deps": {}
-    },
-    "config.Input-config": {
-      "image": "resources/images/input-config.svg",
-      "state": {
-        "pan": {
-          "x": -23,
-          "y": 8
-        },
-        "zoom": 1
-      },
-      "graph": {
-        "blocks": [
-          {
-            "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
-            "type": "basic.code",
-            "data": {
-              "code": "wire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
-              "ports": {
-                "in": [
-                  "i"
-                ],
-                "out": [
-                  "o"
-                ]
-              }
-            },
-            "position": {
-              "x": 256,
-              "y": 104
-            }
-          },
-          {
-            "id": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
-            "type": "basic.input",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 64,
-              "y": 200
-            }
-          },
-          {
-            "id": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
-            "type": "basic.output",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 776,
-              "y": 200
-            }
-          }
-        ],
-        "wires": [
-          {
-            "source": {
-              "block": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
-              "port": "out"
-            },
-            "target": {
-              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
-              "port": "i"
-            }
-          },
-          {
-            "source": {
-              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
-              "port": "o"
-            },
-            "target": {
-              "block": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
-              "port": "in"
-            }
           }
         ]
       },
@@ -2414,6 +2336,84 @@
         },
         "zoom": 1
       }
+    },
+    "config.pull-up-inv": {
+      "image": "resources/images/pull-up-inv.svg",
+      "state": {
+        "pan": {
+          "x": -23,
+          "y": 8
+        },
+        "zoom": 1
+      },
+      "graph": {
+        "blocks": [
+          {
+            "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
+            "type": "basic.code",
+            "data": {
+              "code": "// Pull up inv\n\nwire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
+              "ports": {
+                "in": [
+                  "i"
+                ],
+                "out": [
+                  "o"
+                ]
+              }
+            },
+            "position": {
+              "x": 256,
+              "y": 104
+            }
+          },
+          {
+            "id": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
+            "type": "basic.input",
+            "data": {
+              "label": ""
+            },
+            "position": {
+              "x": 64,
+              "y": 200
+            }
+          },
+          {
+            "id": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
+            "type": "basic.output",
+            "data": {
+              "label": ""
+            },
+            "position": {
+              "x": 760,
+              "y": 200
+            }
+          }
+        ],
+        "wires": [
+          {
+            "source": {
+              "block": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
+              "port": "out"
+            },
+            "target": {
+              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
+              "port": "i"
+            }
+          },
+          {
+            "source": {
+              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
+              "port": "o"
+            },
+            "target": {
+              "block": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
+              "port": "in"
+            }
+          }
+        ]
+      },
+      "deps": {}
     }
   }
 }
