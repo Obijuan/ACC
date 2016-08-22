@@ -1,0 +1,12 @@
+# -- Hello world example that can be both: executed in ACC1 and 
+# -- simulated in yaAGC
+# -- The program is just an infinite loop that do nothing
+# -- To assemble: ./yaYUL test3.ags
+# -- To simulate: ./yaAGC  --exec=test3.ags.bin
+
+	SETLOC 4000  
+
+loop	NOOP
+	TC loop
+
+
