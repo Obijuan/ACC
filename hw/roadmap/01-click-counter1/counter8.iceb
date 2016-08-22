@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 0.9999999917809491
+    "zoom": 1
   },
   "graph": {
     "blocks": [
@@ -123,7 +123,7 @@
         "id": "284dc6c4-1fec-4979-83cd-d4f397127011",
         "type": "basic.code",
         "data": {
-          "code": "wire rst;\nreg [7:0] counter;\n\nalways @(posedge clk or posedge rst) begin\n  if (rst==1'b1) \n    counter <= 7'b0;\n  else\n    counter <= counter + 1;\nend\n\nassign c0 = counter[0];\nassign c1 = counter[1];\nassign c2 = counter[2];\nassign c3 = counter[3];\nassign c4 = counter[4];\nassign c5 = counter[5];\nassign c6 = counter[6];\nassign c7 = counter[7];\n",
+          "code": "wire rst;\nreg [7:0] counter;\n\nalways @(posedge clk or posedge rst) begin\n  if (rst==1'b1) \n    counter <= 7'b0;\n  else\n    counter <= counter + 1;\nend\n\nassign {c7,c6,c5,c4,c3,c2,c1,c0} = counter;\n",
           "ports": {
             "in": [
               "clk",

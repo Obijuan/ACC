@@ -2,10 +2,10 @@
   "image": "",
   "state": {
     "pan": {
-      "x": 43.00000127066614,
-      "y": 3.0000000886511256
+      "x": 76.00000127066613,
+      "y": 6.0000000886511256
     },
-    "zoom": 0.9999999917809491
+    "zoom": 1
   },
   "board": "icezum",
   "graph": {
@@ -37,24 +37,6 @@
         },
         "position": {
           "x": 32,
-          "y": 192
-        }
-      },
-      {
-        "id": "06162efa-502b-4686-a438-c3026bc8e2fc",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 216,
-          "y": 64
-        }
-      },
-      {
-        "id": "07c5dead-9a3d-4b60-bdc5-83e8030ce01a",
-        "type": "config.Input-config",
-        "data": {},
-        "position": {
-          "x": 216,
           "y": 192
         }
       },
@@ -179,22 +161,40 @@
         }
       },
       {
-        "id": "46f6681b-9ad1-4b45-9647-898239f922bd",
-        "type": "basic.info",
-        "data": {
-          "info": ""
-        },
+        "id": "06974687-2009-41a5-9e6b-232e589dab42",
+        "type": "config.pull-up-inv",
+        "data": {},
         "position": {
-          "x": 40,
-          "y": 360
+          "x": 208,
+          "y": 64
         }
       },
       {
-        "id": "db693bac-a974-41c9-b996-b7926d4fa45e",
+        "id": "80e4a3c7-8b7b-4613-beab-052e4f9b8ccc",
+        "type": "config.pull-up-inv",
+        "data": {},
+        "position": {
+          "x": 208,
+          "y": 192
+        }
+      },
+      {
+        "id": "ee8be28f-3fd7-46f6-bdf3-b439ad6bb04f",
+        "type": "basic.info",
+        "data": {
+          "info": "Example of a manual counter. It is an 8-bit\ncounter with the output connected to the leds\n\nIt should count the number of times the button\nSW1 is pressed... but as there are bouncing,\neverty time the button is pressed the counter\nis increased by more than 1 unit\n\nIt is the proof that the switches produce\nbouncing: instead of a clear rising edge pulse,\na train of pulses is generated on every click"
+        },
+        "position": {
+          "x": 24,
+          "y": 296
+        }
+      },
+      {
+        "id": "a68543f1-9e86-4525-a61a-6b25935d7187",
         "type": "counter8",
         "data": {},
         "position": {
-          "x": 424,
+          "x": 400,
           "y": 32
         }
       }
@@ -206,7 +206,7 @@
           "port": "out"
         },
         "target": {
-          "block": "06162efa-502b-4686-a438-c3026bc8e2fc",
+          "block": "06974687-2009-41a5-9e6b-232e589dab42",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
@@ -216,33 +216,33 @@
           "port": "out"
         },
         "target": {
-          "block": "07c5dead-9a3d-4b60-bdc5-83e8030ce01a",
+          "block": "80e4a3c7-8b7b-4613-beab-052e4f9b8ccc",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "06162efa-502b-4686-a438-c3026bc8e2fc",
+          "block": "06974687-2009-41a5-9e6b-232e589dab42",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "8d359ccf-e55c-4f62-9f4e-0ed669093f37"
         }
       },
       {
         "source": {
-          "block": "07c5dead-9a3d-4b60-bdc5-83e8030ce01a",
+          "block": "80e4a3c7-8b7b-4613-beab-052e4f9b8ccc",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "d1cb5113-959b-4b28-96d0-7cc069764a6c"
         }
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "80caeb1a-62f7-47ee-a810-919a177c5edc"
         },
         "target": {
@@ -252,23 +252,17 @@
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "e9374cff-f9cb-4f7d-810e-ca8de33c9185"
         },
         "target": {
           "block": "2f19eb30-63bd-4f86-a48b-dcdfce15f1f5",
           "port": "in"
-        },
-        "vertices": [
-          {
-            "x": 672,
-            "y": 96
-          }
-        ]
+        }
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "70ad0ba4-d26b-4d19-b402-a9e1632cdd44"
         },
         "target": {
@@ -284,7 +278,7 @@
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "7e229adb-461e-4aa2-92f7-c23cebd73d79"
         },
         "target": {
@@ -294,13 +288,13 @@
         "vertices": [
           {
             "x": 656,
-            "y": 232
+            "y": 224
           }
         ]
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "4c406084-e76c-4429-b72d-22273015589c"
         },
         "target": {
@@ -309,14 +303,14 @@
         },
         "vertices": [
           {
-            "x": 640,
-            "y": 296
+            "x": 648,
+            "y": 280
           }
         ]
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "3364a6ce-7682-4c7d-a8be-81f0a227d054"
         },
         "target": {
@@ -325,14 +319,14 @@
         },
         "vertices": [
           {
-            "x": 624,
-            "y": 288
+            "x": 640,
+            "y": 368
           }
         ]
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "368f3996-1b7e-4a92-b28e-5b79b325c7eb"
         },
         "target": {
@@ -341,14 +335,14 @@
         },
         "vertices": [
           {
-            "x": 608,
-            "y": 376
+            "x": 632,
+            "y": 432
           }
         ]
       },
       {
         "source": {
-          "block": "db693bac-a974-41c9-b996-b7926d4fa45e",
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
           "port": "269f800a-9355-46ee-8099-266832364058"
         },
         "target": {
@@ -357,16 +351,16 @@
         },
         "vertices": [
           {
-            "x": 592,
-            "y": 376
+            "x": 624,
+            "y": 512
           }
         ]
       }
     ]
   },
   "deps": {
-    "config.Input-config": {
-      "image": "resources/images/input-config.svg",
+    "config.pull-up-inv": {
+      "image": "resources/images/pull-up-inv.svg",
       "state": {
         "pan": {
           "x": -23,
@@ -380,7 +374,7 @@
             "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
             "type": "basic.code",
             "data": {
-              "code": "wire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
+              "code": "// Pull up inv\n\nwire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
               "ports": {
                 "in": [
                   "i"
@@ -413,7 +407,7 @@
               "label": ""
             },
             "position": {
-              "x": 776,
+              "x": 760,
               "y": 200
             }
           }
@@ -450,7 +444,7 @@
           "x": 0,
           "y": 0
         },
-        "zoom": 0.9999999917809491
+        "zoom": 1
       },
       "graph": {
         "blocks": [
@@ -568,7 +562,7 @@
             "id": "284dc6c4-1fec-4979-83cd-d4f397127011",
             "type": "basic.code",
             "data": {
-              "code": "wire rst;\nreg [7:0] counter;\n\nalways @(posedge clk or posedge rst) begin\n  if (rst==1'b1) \n    counter <= 7'b0;\n  else\n    counter <= counter + 1;\nend\n\nassign c0 = counter[0];\nassign c1 = counter[1];\nassign c2 = counter[2];\nassign c3 = counter[3];\nassign c4 = counter[4];\nassign c5 = counter[5];\nassign c6 = counter[6];\nassign c7 = counter[7];\n",
+              "code": "wire rst;\nreg [7:0] counter;\n\nalways @(posedge clk or posedge rst) begin\n  if (rst==1'b1) \n    counter <= 7'b0;\n  else\n    counter <= counter + 1;\nend\n\nassign {c7,c6,c5,c4,c3,c2,c1,c0} = counter;\n",
               "ports": {
                 "in": [
                   "clk",
