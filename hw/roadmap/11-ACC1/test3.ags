@@ -7,6 +7,6 @@
 	SETLOC 4000  
 
 loop	NOOP
-	TC loop
+	TCF loop
 
 
