@@ -2,4 +2,5 @@
 *.blif
 .sconsign.dblite
 *.out
+*.symtab
 
