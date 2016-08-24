@@ -1,0 +1,18 @@
+#-- ACC1 test
+#-- ACC1 will show the data on the leds (7 MSB)
+#-- in an infinite loop
+
+	SETLOC 4000
+
+loop1	CA val1    #-- 011 1000
+	OCT 40000  #-- 100 0000
+	OCT 60000  #-- 110 0000
+	OCT 70000  #-- 111 0000
+	OCT 74000  #-- 111 1000
+	OCT 76000  #-- 111 1100
+	OCT 77000  #-- 111 1110
+	OCT 77400  #-- 111 1111
+	
+	TCF loop1    #-- 0001000
+
+val1	OCT 40000  #-- 100 0000
