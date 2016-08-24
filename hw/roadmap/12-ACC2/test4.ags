@@ -4,15 +4,19 @@
 
 	SETLOC 4000
 
-loop1	CA val1    #-- 011 1000
-	OCT 40000  #-- 100 0000
-	OCT 60000  #-- 110 0000
-	OCT 70000  #-- 111 0000
-	OCT 74000  #-- 111 1000
-	OCT 76000  #-- 111 1100
-	OCT 77000  #-- 111 1110
-	OCT 77400  #-- 111 1111
-	
-	TCF loop1    #-- 0001000
+loop1	CA val1      
+	CA val2
+	CA val3 
+	CA val4
+	CA val5
+	CA val6
+	CA val7   
+	TCF loop1
 
-val1	OCT 40000  #-- 100 0000
+val1	OCT 00100  #-- 1 000 000
+val2	OCT 00040  #-- 0 100 000
+val3	OCT 00020  #-- 0 010 000
+val4	OCT 00010  #-- 0 001 000
+val5	OCT 00004  #-- 0 000 100
+val6	OCT 00002  #-- 0 000 010
+val7	OCT 00001  #-- 0 000 001

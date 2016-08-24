@@ -57,8 +57,11 @@ localparam DW = 16;     //-- Data bus
 //-- Initial address
 localparam BOOT_ADDR = 12'h800;
 
-//-- Initial G-reg value (shown in leds initially)
-localparam G_INIT = 15'hAA00;
+//-- Initial G-reg value
+localparam G_INIT = 15'b0;
+
+//-- Initial A-reg value (shown in leds initially)
+localparam A_INIT = 15'h0055;
 
 //-- Default mode configuration (Uncomment one of the options)
 //localparam DEFAULT_MODE = AUTOMATIC_MODE;
@@ -190,7 +193,7 @@ always @(posedge clk)
 //------------------------------------------
 //-- A REGISTER
 //------------------------------------------
-reg [14:0] A = 15'b0;
+reg [14:0] A = A_INIT;
 
 always @(posedge clk) begin
   if (WA)
@@ -201,11 +204,15 @@ end
 //-- LEDS
 //-----------------------------------------
 
-//-- The 7 more significant bits of G regs are shown in leds
-assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
+//-- The 7 more significant bits of G regs are shown in leds (DEBUG)
+//assign {d6,d5,d4,d3,d2,d1,d0} = G[14:8];
+
+//-- Show the 7 less significant bits of the A reg in the leds
+assign {d6, d5, d4, d3, d2, d1, d0} = A[6:0];
 
 //-- The LED7 is for displaying the mode (automatic/manual)
 assign d7 = mode;
+//assign d7 = A[7]; //-- Debug
 
 //------------------------------------------
 //-- Timer for the automatic mode
