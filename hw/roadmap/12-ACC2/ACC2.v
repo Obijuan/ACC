@@ -41,6 +41,7 @@ localparam FAST = 20;    //--  90 ms
 
 //-- AGC Opcodes
 localparam  TCF = 3'b001;  //-- Transfer Control Fixed. Unconditional jump
+localparam  CA  = 3'b011;  //-- Clear and Add. Load the A register from memory
 
 //-------------------------------------------------
 //-- PARAMETERS & CONFIGURATION
@@ -76,6 +77,10 @@ localparam AUTOMATIC_MODE_SPEED = MEDIUM;
 //-- ROM output data
 wire [DW-1: 0] rom_dout;
 
+
+//-- ROM address wire
+wire [AW-1:0] addr;
+
 //-- Instantiate the ROM memory (2K)
 genrom #(
         .ROMFILE(ROMFILE),
@@ -83,10 +88,15 @@ genrom #(
         .DW(DW))
   ROM (
         .clk(clk),
-        .cs(S[AW-1]),         //-- Bit A11 for the chip select
-        .addr(S[AW-2:0]),     //-- Bits A10 - A0 for addressing the Rom (2K)
+        .cs(addr[AW-1]),         //-- Bit A11 for the chip select
+        .addr(addr[AW-2:0]),     //-- Bits A10 - A0 for addressing the Rom (2K)
         .data_out(rom_dout)
       );
+
+//-- Addr multiplexer. Select where the addres come from
+//-- SelSG == 0 --> From the S register
+//-- SelSG == 1 --> From the G register
+assign addr = (SelSG == 1) ? G[11:0] : S;
 
 //-----------------------------------------------------------
 //-- INPUT BUTTONS CONFIGURATION
@@ -232,19 +242,21 @@ wire event_trig = (mode == MANUAL_MODE) ? sw1_deb : timer_trig_pulse;
 
 //-- fsm states
 localparam  FETCH = 0;
-localparam  READ_OP = 1;
+localparam  READ_INST = 1;
 localparam  EXEC0 = 2;
-localparam  WAIT = 3;
+localparam  EXEC1 = 3;
+localparam  WAIT = 4;
 
 //-- Registers for storing the states
-reg [1:0] state = WAIT;
-reg [1:0] next_state;
+reg [2:0] state = WAIT;
+reg [2:0] next_state;
 
 //---------------- Control signals
 reg WG = 0;    //-- Load the G register
 reg INCS = 0;  //-- Increment the S register
 reg WS = 0;    //-- Load the S register
 reg WA = 0;    //-- Load the A register
+reg SelSG = 0; //-- Address multiplexer selection
 
 //-- Transition between states
 always @(posedge clk)
@@ -258,14 +270,16 @@ always @(*) begin
   WG = 0;
   INCS = 0;
   WS = 0;
+  WA = 0;
+  SelSG = 0;
 
   case (state)
 
     FETCH: begin
-      next_state = READ_OP;
+      next_state = READ_INST;
     end
 
-    READ_OP: begin
+    READ_INST: begin
       WG = 1;   //-- Read the opcode into the G register
       INCS = 1; //-- Increment the S reg
       next_state = EXEC0;
@@ -274,10 +288,29 @@ always @(*) begin
     EXEC0: begin
 
       //-- If opcode is TCF, load the register S
-      if (opcode == TCF)
-        WS = 1;
+      case (opcode)
+        TCF: begin
+          WS = 1;
+          next_state = WAIT;
+        end
 
-      next_state = WAIT;
+        CA: begin
+          SelSG = 1;
+          next_state = EXEC1;
+        end
+
+        default: begin
+          next_state = WAIT;
+        end
+      endcase
+    end //-- EXEC0
+
+    EXEC1: begin
+      if (opcode == CA) begin
+        WA = 1;
+        SelSG = 1;
+        next_state = WAIT;
+      end
     end
 
     WAIT: begin
