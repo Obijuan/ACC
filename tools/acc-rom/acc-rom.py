@@ -70,12 +70,10 @@ def main():
     # -- Open the AGC binary file
     try:
         with open(binfile, "rb") as f:
-            opcode = get_opcode(f)
-
-            while opcode != 0:
-                # print("{0:05o} ({0:04X} hex)".format(opcode))
-                mcode += "{0:04X}\n".format(opcode)
+            # -- Read 1K words (block 2)
+            for i in range(1023):
                 opcode = get_opcode(f)
+                mcode += "{0:04X}\n".format(opcode)
     except:
         print("Error: file not found: {}".format(binfile))
         sys.exit()
