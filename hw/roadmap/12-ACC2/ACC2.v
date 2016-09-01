@@ -4,7 +4,11 @@
 //-- (C) August 2016. Juan Gonzaelz-Gomez (Obijuan)
 //-- Released under the GPL license
 //-----------------------------------------------------------------------------
-//-- TODO
+//-- It is an ACC1 with the following features:
+//--
+//--   * Register A
+//--   * The control unit can execute the CA instruction
+//--   * The 6 less signficant leds of the register A are shown in the leds
 //--
 //-----------------------------------------------------------------------------
 `default_nettype none
@@ -17,14 +21,14 @@ module ACC2 (
     input wire next,      //-- Process next instruction/data
     input wire selmode,   //-- Toggle Mode: Manual / automatic
 
-    output wire d0,       //-- Output leds
+    output wire d0,       //-- Output leds (register A)
     output wire d1,
     output wire d2,
     output wire d3,
     output wire d4,
     output wire d5,
     output wire d6,
-    output wire d7
+    output wire d7        //-- Model leds
 );
 
 //--------------------------------------------
