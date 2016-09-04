@@ -1,11 +1,13 @@
-#-- ACC1 test
-#-- ACC1 will show the data on the leds (7 MSB)
-#-- in an infinite loop
+#-- ACC2 test
+#-- Testing the CA insruction
+#-- ACC2 will load the A register with different values
+#-- in ACC2 The 7 less significant bytes of the A reg
+#--   are always shown in the leds
 
 	SETLOC 4000
 
-loop1	CA val1      
-	CA val2
+loop1	CA val1   #-- Load value store in valx address
+	CA val2  
 	CA val3 
 	CA val4
 	CA val5
