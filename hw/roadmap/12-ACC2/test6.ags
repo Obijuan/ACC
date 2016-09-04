@@ -1,0 +1,25 @@
+#-- ACC2 test
+#-- Example of use of the EQUALS and = directives (are equivalents)
+
+
+#-- DATO1 defines the same address than the val1 label
+DATA1   EQUALS val1
+
+#-- DATO2 defines the same address than the val2 label
+#-- (equivalent to EQUALS)
+DATA2	= val2
+
+
+	SETLOC 4000
+
+loop	CA DATA1  #-- Data in val1 is loaded
+	CA DATA2  #-- Data in val2 is loaded
+	TCF loop
+
+#-- Data define in decimal
+val1	DEC 255
+val2	DEC 63
+
+
+
+
