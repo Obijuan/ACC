@@ -15,6 +15,7 @@ loop1	CA val1   #-- Load value store in valx address
 	CA val7   
 	TCF loop1
 
+                   #-- Value shown in leds
 val1	OCT 00100  #-- 1 000 000
 val2	OCT 00040  #-- 0 100 000
 val3	OCT 00020  #-- 0 010 000
