@@ -1,0 +1,14 @@
+#-- ACC2 test
+#-- Testing the DEC directive
+
+	SETLOC 4000
+
+loop	CA val1      
+	CA val2
+	TCF loop
+
+#-- Data defined in decimal
+val1	DEC 15    # -- 0x000F
+val2	DEC 255   # -- 0x00FF
+
+
