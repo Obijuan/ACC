@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 1
+    "zoom": 0.9999999899455566
   },
   "board": "icezum",
   "graph": {
@@ -214,8 +214,8 @@
         }
       },
       {
-        "id": "551e10c9-af00-4090-a550-44b28f3d6ddb",
-        "type": "config.pull-up-inv",
+        "id": "81cbc9d9-b2b4-4849-918e-694a5864f62d",
+        "type": "config.pull_up_inv",
         "data": {},
         "position": {
           "x": 224,
@@ -223,8 +223,8 @@
         }
       },
       {
-        "id": "1fb73a63-0043-4f34-b25b-abb5b85ac58d",
-        "type": "config.pull-up-inv",
+        "id": "4654a417-56ce-4184-8141-e4fc8f7a6fb8",
+        "type": "config.pull_up_inv",
         "data": {},
         "position": {
           "x": 224,
@@ -425,13 +425,13 @@
           "port": "out"
         },
         "target": {
-          "block": "551e10c9-af00-4090-a550-44b28f3d6ddb",
+          "block": "81cbc9d9-b2b4-4849-918e-694a5864f62d",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "551e10c9-af00-4090-a550-44b28f3d6ddb",
+          "block": "81cbc9d9-b2b4-4849-918e-694a5864f62d",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -445,13 +445,13 @@
           "port": "out"
         },
         "target": {
-          "block": "1fb73a63-0043-4f34-b25b-abb5b85ac58d",
+          "block": "4654a417-56ce-4184-8141-e4fc8f7a6fb8",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "1fb73a63-0043-4f34-b25b-abb5b85ac58d",
+          "block": "4654a417-56ce-4184-8141-e4fc8f7a6fb8",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -1391,8 +1391,8 @@
         }
       }
     },
-    "config.pull-up-inv": {
-      "image": "resources/images/pull-up-inv.svg",
+    "config.pull_up_inv": {
+      "image": "resources/images/pull_up_inv.svg",
       "state": {
         "pan": {
           "x": -23,

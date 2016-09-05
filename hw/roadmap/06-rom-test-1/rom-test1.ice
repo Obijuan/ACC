@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 1
+    "zoom": 0.9999999899455566
   },
   "board": "icezum",
   "graph": {
@@ -214,20 +214,20 @@
         }
       },
       {
-        "id": "039a5c9d-3a2a-468b-92e8-08f7c7372f40",
-        "type": "config.pull-up-inv",
+        "id": "3b1b6e3d-3ec9-4005-a51c-f79308ea2d65",
+        "type": "config.pull_up_inv",
         "data": {},
         "position": {
-          "x": 232,
+          "x": 224,
           "y": 152
         }
       },
       {
-        "id": "62ad6903-15ae-403c-a0ca-b208da07dde4",
-        "type": "config.pull-up-inv",
+        "id": "5fa5dd53-d306-4304-8312-a08af6f14820",
+        "type": "config.pull_up_inv",
         "data": {},
         "position": {
-          "x": 240,
+          "x": 224,
           "y": 264
         }
       }
@@ -426,13 +426,13 @@
           "port": "out"
         },
         "target": {
-          "block": "039a5c9d-3a2a-468b-92e8-08f7c7372f40",
+          "block": "3b1b6e3d-3ec9-4005-a51c-f79308ea2d65",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "039a5c9d-3a2a-468b-92e8-08f7c7372f40",
+          "block": "3b1b6e3d-3ec9-4005-a51c-f79308ea2d65",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -446,13 +446,13 @@
           "port": "out"
         },
         "target": {
-          "block": "62ad6903-15ae-403c-a0ca-b208da07dde4",
+          "block": "5fa5dd53-d306-4304-8312-a08af6f14820",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "62ad6903-15ae-403c-a0ca-b208da07dde4",
+          "block": "5fa5dd53-d306-4304-8312-a08af6f14820",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -1392,8 +1392,8 @@
         }
       }
     },
-    "config.pull-up-inv": {
-      "image": "resources/images/pull-up-inv.svg",
+    "config.pull_up_inv": {
+      "image": "resources/images/pull_up_inv.svg",
       "state": {
         "pan": {
           "x": -23,

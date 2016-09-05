@@ -5,7 +5,7 @@
       "x": 76.00000127066613,
       "y": 6.0000000886511256
     },
-    "zoom": 1
+    "zoom": 0.9999999899455566
   },
   "board": "icezum",
   "graph": {
@@ -161,24 +161,6 @@
         }
       },
       {
-        "id": "06974687-2009-41a5-9e6b-232e589dab42",
-        "type": "config.pull-up-inv",
-        "data": {},
-        "position": {
-          "x": 208,
-          "y": 64
-        }
-      },
-      {
-        "id": "80e4a3c7-8b7b-4613-beab-052e4f9b8ccc",
-        "type": "config.pull-up-inv",
-        "data": {},
-        "position": {
-          "x": 208,
-          "y": 192
-        }
-      },
-      {
         "id": "ee8be28f-3fd7-46f6-bdf3-b439ad6bb04f",
         "type": "basic.info",
         "data": {
@@ -197,49 +179,27 @@
           "x": 400,
           "y": 32
         }
+      },
+      {
+        "id": "e10f5906-2caa-4add-8276-88302c040f04",
+        "type": "config.pull_up_inv",
+        "data": {},
+        "position": {
+          "x": 208,
+          "y": 64
+        }
+      },
+      {
+        "id": "f567a182-ce8d-4a27-be1b-7d6329b32cd9",
+        "type": "config.pull_up_inv",
+        "data": {},
+        "position": {
+          "x": 216,
+          "y": 192
+        }
       }
     ],
     "wires": [
-      {
-        "source": {
-          "block": "9ed9ce8c-2871-4c18-8685-6af075476ca3",
-          "port": "out"
-        },
-        "target": {
-          "block": "06974687-2009-41a5-9e6b-232e589dab42",
-          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
-        }
-      },
-      {
-        "source": {
-          "block": "798626dc-b5dc-4294-869f-20ba2b6d3a2a",
-          "port": "out"
-        },
-        "target": {
-          "block": "80e4a3c7-8b7b-4613-beab-052e4f9b8ccc",
-          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
-        }
-      },
-      {
-        "source": {
-          "block": "06974687-2009-41a5-9e6b-232e589dab42",
-          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
-        },
-        "target": {
-          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
-          "port": "8d359ccf-e55c-4f62-9f4e-0ed669093f37"
-        }
-      },
-      {
-        "source": {
-          "block": "80e4a3c7-8b7b-4613-beab-052e4f9b8ccc",
-          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
-        },
-        "target": {
-          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
-          "port": "d1cb5113-959b-4b28-96d0-7cc069764a6c"
-        }
-      },
       {
         "source": {
           "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
@@ -355,88 +315,50 @@
             "y": 512
           }
         ]
+      },
+      {
+        "source": {
+          "block": "9ed9ce8c-2871-4c18-8685-6af075476ca3",
+          "port": "out"
+        },
+        "target": {
+          "block": "e10f5906-2caa-4add-8276-88302c040f04",
+          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
+        }
+      },
+      {
+        "source": {
+          "block": "e10f5906-2caa-4add-8276-88302c040f04",
+          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
+        },
+        "target": {
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
+          "port": "8d359ccf-e55c-4f62-9f4e-0ed669093f37"
+        }
+      },
+      {
+        "source": {
+          "block": "798626dc-b5dc-4294-869f-20ba2b6d3a2a",
+          "port": "out"
+        },
+        "target": {
+          "block": "f567a182-ce8d-4a27-be1b-7d6329b32cd9",
+          "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
+        }
+      },
+      {
+        "source": {
+          "block": "f567a182-ce8d-4a27-be1b-7d6329b32cd9",
+          "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
+        },
+        "target": {
+          "block": "a68543f1-9e86-4525-a61a-6b25935d7187",
+          "port": "d1cb5113-959b-4b28-96d0-7cc069764a6c"
+        }
       }
     ]
   },
   "deps": {
-    "config.pull-up-inv": {
-      "image": "resources/images/pull-up-inv.svg",
-      "state": {
-        "pan": {
-          "x": -23,
-          "y": 8
-        },
-        "zoom": 1
-      },
-      "graph": {
-        "blocks": [
-          {
-            "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
-            "type": "basic.code",
-            "data": {
-              "code": "// Pull up inv\n\nwire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
-              "ports": {
-                "in": [
-                  "i"
-                ],
-                "out": [
-                  "o"
-                ]
-              }
-            },
-            "position": {
-              "x": 256,
-              "y": 104
-            }
-          },
-          {
-            "id": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
-            "type": "basic.input",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 64,
-              "y": 200
-            }
-          },
-          {
-            "id": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
-            "type": "basic.output",
-            "data": {
-              "label": ""
-            },
-            "position": {
-              "x": 760,
-              "y": 200
-            }
-          }
-        ],
-        "wires": [
-          {
-            "source": {
-              "block": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
-              "port": "out"
-            },
-            "target": {
-              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
-              "port": "i"
-            }
-          },
-          {
-            "source": {
-              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
-              "port": "o"
-            },
-            "target": {
-              "block": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
-              "port": "in"
-            }
-          }
-        ]
-      },
-      "deps": {}
-    },
     "counter8": {
       "image": "",
       "state": {
@@ -721,6 +643,84 @@
             "target": {
               "block": "284dc6c4-1fec-4979-83cd-d4f397127011",
               "port": "rst"
+            }
+          }
+        ]
+      },
+      "deps": {}
+    },
+    "config.pull_up_inv": {
+      "image": "resources/images/pull_up_inv.svg",
+      "state": {
+        "pan": {
+          "x": -23,
+          "y": 8
+        },
+        "zoom": 1
+      },
+      "graph": {
+        "blocks": [
+          {
+            "id": "2b245a71-2d80-466b-955f-e3d61839fe25",
+            "type": "basic.code",
+            "data": {
+              "code": "// Pull up inv\n\nwire din, dout, outen;\n\nassign o = ~din;\n\nSB_IO #(\n    .PIN_TYPE(6'b 1010_01),\n    .PULLUP(1'b 1)\n) io_pin (\n    .PACKAGE_PIN(i),\n    .OUTPUT_ENABLE(outen),\n    .D_OUT_0(dout),\n    .D_IN_0(din)\n);",
+              "ports": {
+                "in": [
+                  "i"
+                ],
+                "out": [
+                  "o"
+                ]
+              }
+            },
+            "position": {
+              "x": 256,
+              "y": 104
+            }
+          },
+          {
+            "id": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
+            "type": "basic.input",
+            "data": {
+              "label": ""
+            },
+            "position": {
+              "x": 64,
+              "y": 200
+            }
+          },
+          {
+            "id": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
+            "type": "basic.output",
+            "data": {
+              "label": ""
+            },
+            "position": {
+              "x": 760,
+              "y": 200
+            }
+          }
+        ],
+        "wires": [
+          {
+            "source": {
+              "block": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150",
+              "port": "out"
+            },
+            "target": {
+              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
+              "port": "i"
+            }
+          },
+          {
+            "source": {
+              "block": "2b245a71-2d80-466b-955f-e3d61839fe25",
+              "port": "o"
+            },
+            "target": {
+              "block": "a139fa0d-9b45-4480-a251-f4a66b49aa23",
+              "port": "in"
             }
           }
         ]

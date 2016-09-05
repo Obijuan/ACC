@@ -5,7 +5,7 @@
       "x": 0,
       "y": 0
     },
-    "zoom": 1
+    "zoom": 0.9999999899455566
   },
   "board": "icezum",
   "graph": {
@@ -65,11 +65,11 @@
         }
       },
       {
-        "id": "2d4830b5-4c2b-4e05-8f62-ffbfd10f6178",
-        "type": "config.pull-up-inv",
+        "id": "abab8979-97ba-4d5d-88bd-7fcb56d35aa1",
+        "type": "config.pull_up_inv",
         "data": {},
         "position": {
-          "x": 216,
+          "x": 208,
           "y": 144
         }
       }
@@ -101,13 +101,13 @@
           "port": "out"
         },
         "target": {
-          "block": "2d4830b5-4c2b-4e05-8f62-ffbfd10f6178",
+          "block": "abab8979-97ba-4d5d-88bd-7fcb56d35aa1",
           "port": "bb4a1ca9-1b30-471e-92ca-ca7ff2fc1150"
         }
       },
       {
         "source": {
-          "block": "2d4830b5-4c2b-4e05-8f62-ffbfd10f6178",
+          "block": "abab8979-97ba-4d5d-88bd-7fcb56d35aa1",
           "port": "a139fa0d-9b45-4480-a251-f4a66b49aa23"
         },
         "target": {
@@ -383,8 +383,8 @@
         }
       }
     },
-    "config.pull-up-inv": {
-      "image": "resources/images/pull-up-inv.svg",
+    "config.pull_up_inv": {
+      "image": "resources/images/pull_up_inv.svg",
       "state": {
         "pan": {
           "x": -23,
